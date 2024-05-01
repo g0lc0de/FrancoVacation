@@ -76,7 +76,7 @@ public enum CLI {
         if ("y".equals(response)) {
 
             System.out.println("Zu welcher Region wollen Sie Details sehen?");
-            String regionResponse = getInput();
+            String regionResponse = getInput().toLowerCase();
             showRegionDetails(regionResponse);
 
         } else {
@@ -119,7 +119,7 @@ public enum CLI {
 
         System.out.println("Trip:");
         System.out.printf("Region Name: %s\n",tripAdapter.getRegionDetails().getName());
-        System.out.println("Activities:");
+        System.out.println("Aktivitäten:");
 
         for (Activity a : tripAdapter.getTrip().getActivitiesThatMatchQuery()) {
             System.out.printf("- %s | Saison: %s | Level: %s\n",a.getName(), a.getSeasons().toString(), a.getActivityLevel().getActivityLevelType());

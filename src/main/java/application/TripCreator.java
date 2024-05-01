@@ -183,7 +183,7 @@ public class TripCreator {
                 }
 
                 List<Activity> matchingActivitiesPerRegionList = new ArrayList<>();
-                if (matchingActivitiesPerRegionMap.containsKey(region.getName())) {
+                if (matchingActivitiesPerRegionMap.containsKey(region.getName().toLowerCase())) {
                     matchingActivitiesPerRegionList = matchingActivitiesPerRegionMap.get(region.getName().toLowerCase());
                 }
                 matchingActivitiesPerRegionList.add(a);
