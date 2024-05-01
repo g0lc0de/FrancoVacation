@@ -1,6 +1,8 @@
 package domain.valueObject;
 
-public enum Season {
+import domain.entity.auxilliary.PartOfQuery;
+
+public enum Season implements PartOfQuery {
 
     SUMMER,
     FALL,

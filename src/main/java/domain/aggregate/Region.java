@@ -1,15 +1,15 @@
 package domain.aggregate;
 
-import domain.entity.Activity;
 import domain.entity.City;
 import domain.entity.Country;
 import domain.entity.Entity;
+import domain.entity.auxilliary.PartOfQuery;
 import domain.entity.auxilliary.PhysicalLocation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Region implements PhysicalLocation, Entity {
+public class Region implements PhysicalLocation, Entity, PartOfQuery {
 
     private String name;
     private List<Country> countries;

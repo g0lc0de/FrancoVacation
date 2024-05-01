@@ -1,13 +1,15 @@
 package plugin;
 
 import adapter.RegionsAdapter;
+import adapter.TripAdapter;
 import application.QueryDataFinder;
+import application.TripCreator;
 import domain.aggregate.Region;
-import domain.entity.Activity;
+import domain.aggregate.Activity;
 import domain.entity.City;
 import domain.entity.Country;
+import domain.aggregate.Trip;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -20,7 +22,7 @@ public enum CLI {
     RegionsAdapter allRegionsAdapter;
 
     public void startInteraction() {
-        allRegionsAdapter = new RegionsAdapter(queryDataFinder.getAllRegions());
+        allRegionsAdapter = new RegionsAdapter(queryDataFinder.getAllRegionsAsList());
 
         displayMenu();
     }
@@ -29,8 +31,7 @@ public enum CLI {
         System.out.println("WILLKOMMEN BEIM REISEPLANER!");
         System.out.println("Wählen Sie eine der folgenden Optionen: ");
         System.out.println("-- 1: Regionen ausgeben");
-        System.out.println("-- 2: KeyWords ausgeben");
-        System.out.println("-- 3: Trip erstellen");
+        System.out.println("-- 2: Trip erstellen");
         System.out.println("-".repeat(20));
         String response = getInput();
         parseMenuResponse(response);
@@ -50,11 +51,13 @@ public enum CLI {
 
         if (responseNumber == 1) {
             displayRegions();
+        } else if (responseNumber == 2) {
+            promptTripCreation();
         }
 
     }
 
-    public void displayRegions() {
+    private void displayRegions() {
         List<String> regionNameList = allRegionsAdapter.getRegionsNameList();
 
         System.out.println("Die folgenden Regionen befinden sich im Reiseplaner!");
@@ -97,17 +100,43 @@ public enum CLI {
         continueToMainMenuPrompt();
     }
 
-    public void continueToMainMenuPrompt() {
+    private void continueToMainMenuPrompt() {
 
         System.out.println("Zum Hauptmenü zurückkehren?");
         getInput();
         displayMenu();
     }
 
+    private void promptTripCreation() {
+
+        System.out.println("Gebe deine Wünsche für einen Trip an! ");
+        System.out.println("Beispiel: \"sportlicher urlaub im winter\"");
+        String tripQuery = getInput();
+
+        TripCreator tripCreator = new TripCreator();
+        TripAdapter tripAdapter = new TripAdapter(tripCreator.findTripBasedOnQuery(tripQuery));
+
+
+        System.out.println("Trip:");
+        System.out.printf("Region Name: %s\n",tripAdapter.getRegionDetails().getName());
+        System.out.println("Activities:");
+
+        for (Activity a : tripAdapter.getTrip().getActivitiesThatMatchQuery()) {
+            System.out.printf("- %s | Saison: %s | Level: %s\n",a.getName(), a.getSeasons().toString(), a.getActivityLevel().getActivityLevelType());
+        }
+
+        System.out.println("Regionale Städte: ");
+        for (City c : tripAdapter.getTrip().getRegion().getCities()) {
+            System.out.printf("- %s\n",c.getName());
+        }
+
+        continueToMainMenuPrompt();
+    }
+
     public String getInput() {
         Scanner sc = new Scanner(System.in);
         System.out.print("::");
-        return sc.next();
+        return sc.nextLine();
     }
 
 }

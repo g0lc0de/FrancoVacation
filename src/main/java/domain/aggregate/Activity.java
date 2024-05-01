@@ -1,10 +1,13 @@
-package domain.entity;
+package domain.aggregate;
 
+import domain.entity.City;
 import domain.valueObject.ActivityLevel;
+import domain.valueObject.ActivityRating;
 import domain.valueObject.Address;
 import domain.valueObject.Season;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Activity {
 
@@ -12,12 +15,13 @@ public class Activity {
     String description;
     Address address;
     City associatedCity;
+    ActivityRating rating;
     // Location
 
     ActivityLevel activityLevel; // {"Entspannt", "Erholung", "Aktiv", "Sport"}
-    Season[] seasons;
+    List<Season> seasons;
 
-    public Activity(String name, String description, Address address, ActivityLevel activityLevel, Season[] seasons) {
+    public Activity(String name, String description, Address address, ActivityLevel activityLevel, List<Season> seasons) {
         this.name = name;
         this.description = description;
         this.address = address;
@@ -25,7 +29,7 @@ public class Activity {
         this.seasons = seasons;
     }
 
-    public Activity(String name, String description, Address address, ActivityLevel activityLevel, Season[] seasons, City associatedCity) {
+    public Activity(String name, String description, Address address, ActivityLevel activityLevel, List<Season> seasons, City associatedCity) {
         this.name = name;
         this.description = description;
         this.address = address;
@@ -41,6 +45,14 @@ public class Activity {
 
     public void setAssociatedCity(City newAssociatedCity) {
         this.associatedCity = newAssociatedCity;
+    }
+
+    public ActivityLevel getActivityLevel() {
+        return activityLevel;
+    }
+
+    public List<Season> getSeasons() {
+        return seasons;
     }
 
     public String getName() {

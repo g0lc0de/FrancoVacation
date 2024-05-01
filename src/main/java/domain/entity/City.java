@@ -1,5 +1,6 @@
 package domain.entity;
 
+import domain.aggregate.Activity;
 import domain.entity.auxilliary.ActivityBuilder;
 import domain.entity.auxilliary.PhysicalLocation;
 

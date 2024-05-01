@@ -4,16 +4,34 @@ import domain.aggregate.Region;
 import domain.entity.City;
 import plugin.MockDataProvider;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class QueryDataFinder {
 
-    public List<Region> getAllRegions() {
+    List<Region> regionsList;
+    Map<String, Region> allRegionMap = new HashMap<String, Region>();
 
+    public QueryDataFinder() {
         // Refactor DI
-        List<Region> regions = MockDataProvider.INSTANCE.getRegions();
+        regionsList = MockDataProvider.INSTANCE.getRegions();
 
-        return regions;
+        for (Region region : regionsList) {
+            allRegionMap.put(region.getName().toLowerCase(Locale.ROOT), region);
+        }
+
+    }
+
+    public List<Region> getAllRegionsAsList() {
+        return this.regionsList;
+    }
+
+    public Region getRegionFromName(String regionName) {
+
+        return this.allRegionMap.get(regionName);
+
     }
 
 }

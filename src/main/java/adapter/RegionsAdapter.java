@@ -1,13 +1,19 @@
 package adapter;
 
+import application.QueryDataFinder;
 import domain.aggregate.Region;
+import domain.entity.Country;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class RegionsAdapter {
 
     private List<Region> regions;
+    private QueryDataFinder queryDataFinder = new QueryDataFinder();
 
     public RegionsAdapter(List<Region> regions) {
         this.regions = regions;
@@ -21,13 +27,13 @@ public class RegionsAdapter {
     public Region getRegionDetails(String regionName) {
 
         // Find Region
-        Region filteredRegion = regions.stream().filter(region -> region.getName().equals(regionName))
-                .findFirst()
-                .orElse(null);
+        Region region = queryDataFinder.getRegionFromName(regionName);
 
-        // Return Region UI Ressource!
+        return Objects.
+                requireNonNullElseGet(region,
+                        () -> new Region("Keine Region gefunden", new ArrayList<>()));
 
-        return filteredRegion;
+
     }
 
 

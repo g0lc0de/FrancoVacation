@@ -1,10 +1,12 @@
 package domain.entity.auxilliary;
 
-import domain.entity.Activity;
+import domain.aggregate.Activity;
 import domain.entity.City;
 import domain.valueObject.ActivityLevel;
 import domain.valueObject.Address;
 import domain.valueObject.Season;
+
+import java.util.List;
 
 public class ActivityBuilder implements Builder {
 
@@ -12,7 +14,7 @@ public class ActivityBuilder implements Builder {
     private String description;
     private ActivityLevel activityLevel;
     private Address address;
-    private Season[] seasons;
+    private List<Season> seasons;
     private City associatedCity;
 
     public ActivityBuilder() {
@@ -35,7 +37,7 @@ public class ActivityBuilder implements Builder {
         return this;
     }
 
-    public ActivityBuilder buildSeasons(Season[] seasons) {
+    public ActivityBuilder buildSeasons(List<Season> seasons) {
         this.seasons = seasons;
         return this;
     }
