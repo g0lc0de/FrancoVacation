@@ -18,11 +18,11 @@ public enum CLI {
 
     INSTANCE;
 
-    QueryDataFinder queryDataFinder = new QueryDataFinder();
+    QueryDataFinder queryDataFinder = new QueryDataFinder(MockDataProvider.INSTANCE);
     RegionsAdapter allRegionsAdapter;
 
     public void startInteraction() {
-        allRegionsAdapter = new RegionsAdapter(queryDataFinder.getAllRegionsAsList());
+        allRegionsAdapter = new RegionsAdapter(queryDataFinder.getAllRegionsAsList(), MockDataProvider.INSTANCE);
 
         displayMenu();
     }

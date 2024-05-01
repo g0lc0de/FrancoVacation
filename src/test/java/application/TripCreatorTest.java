@@ -22,7 +22,7 @@ class TripCreatorTest {
         MockDataProvider.INSTANCE.QueryData();
 
         tripCreator = new TripCreator();
-        queryDataFinder = new QueryDataFinder();
+        queryDataFinder = new QueryDataFinder(MockDataProvider.INSTANCE);
     }
 
     @Test

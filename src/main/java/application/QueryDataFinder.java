@@ -2,6 +2,7 @@ package application;
 
 import domain.aggregate.Region;
 import domain.entity.City;
+import domain.repository.RegionRepository;
 import plugin.MockDataProvider;
 
 import java.util.HashMap;
@@ -14,9 +15,9 @@ public class QueryDataFinder {
     List<Region> regionsList;
     Map<String, Region> allRegionMap = new HashMap<String, Region>();
 
-    public QueryDataFinder() {
-        // Refactor DI
-        regionsList = MockDataProvider.INSTANCE.getRegions();
+    public QueryDataFinder(RegionRepository regionRepository) {
+
+        regionsList = regionRepository.getRegions();
 
         for (Region region : regionsList) {
             allRegionMap.put(region.getName().toLowerCase(Locale.ROOT), region);

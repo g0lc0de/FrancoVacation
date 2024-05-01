@@ -7,6 +7,7 @@ import domain.entity.City;
 import domain.entity.auxilliary.PartOfQuery;
 import domain.valueObject.*;
 import domain.valueObject.auxilliary.QueryBuilder;
+import plugin.MockDataProvider;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -64,7 +65,7 @@ public class TripCreator {
                 continue;
             }
 
-            QueryDataFinder queryDataFinder = new QueryDataFinder();
+            QueryDataFinder queryDataFinder = new QueryDataFinder(MockDataProvider.INSTANCE);
             List<Region> regions = queryDataFinder.getAllRegionsAsList();
             Set<String> regionUIDs = regions.stream()
                     .map(Region::getName)
@@ -126,7 +127,7 @@ public class TripCreator {
     }
 
     public Trip findTripBasedOnQuery(String queryText) {
-        QueryDataFinder queryDataFinder = new QueryDataFinder();
+        QueryDataFinder queryDataFinder = new QueryDataFinder(MockDataProvider.INSTANCE);
 
         Query query = parseQueryText(new QueryText(queryText));
 

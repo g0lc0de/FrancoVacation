@@ -4,6 +4,7 @@ import domain.aggregate.Region;
 import domain.entity.City;
 import domain.entity.Country;
 import domain.entity.auxilliary.ActivityBuilder;
+import domain.repository.RegionRepository;
 import domain.valueObject.ActivityLevel;
 import domain.valueObject.ActivityLevelType;
 import domain.valueObject.Address;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public enum MockDataProvider implements DatabaseConnection {
+public enum MockDataProvider implements DatabaseConnection, RegionRepository {
 
     INSTANCE;
 
@@ -62,7 +63,13 @@ public enum MockDataProvider implements DatabaseConnection {
 
     }
 
+    @Override
     public List<Region> getRegions() {
         return regions;
+    }
+
+    @Override
+    public boolean addRegion(Region region) {
+        return false;
     }
 }

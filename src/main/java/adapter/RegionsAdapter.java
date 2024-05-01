@@ -3,6 +3,7 @@ package adapter;
 import application.QueryDataFinder;
 import domain.aggregate.Region;
 import domain.entity.Country;
+import domain.repository.RegionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +14,11 @@ import java.util.stream.Collectors;
 public class RegionsAdapter {
 
     private List<Region> regions;
-    private QueryDataFinder queryDataFinder = new QueryDataFinder();
+    private QueryDataFinder queryDataFinder;
 
-    public RegionsAdapter(List<Region> regions) {
+    public RegionsAdapter(List<Region> regions, RegionRepository regionRepository) {
         this.regions = regions;
+        this.queryDataFinder = new QueryDataFinder(regionRepository);
     }
 
 
@@ -35,7 +37,4 @@ public class RegionsAdapter {
 
 
     }
-
-
-
 }
