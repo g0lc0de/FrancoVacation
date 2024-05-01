@@ -3,6 +3,7 @@ package plugin;
 import domain.aggregate.Region;
 import domain.entity.Activity;
 import domain.entity.City;
+import domain.entity.Country;
 import domain.entity.auxilliary.ActivityBuilder;
 import domain.valueObject.ActivityLevel;
 import domain.valueObject.ActivityLevelType;
@@ -10,6 +11,7 @@ import domain.valueObject.Address;
 import domain.valueObject.Season;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public enum MockDataProvider implements DatabaseConnection {
@@ -33,9 +35,8 @@ public enum MockDataProvider implements DatabaseConnection {
 
     public void createRegions() {
 
-
-
-        Region black_forest = new Region("Schwarzwald");
+        Country germany = new Country("Deutschland");
+        Region black_forest = new Region("Schwarzwald", Arrays.asList(germany));
         City freiburg = new City("Freiburg");
 
         regions.add(black_forest);

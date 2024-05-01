@@ -8,7 +8,7 @@ import java.util.List;
 
 public class QueryDataFinder {
 
-    public List<Region> getRegions() {
+    public List<Region> getAllRegions() {
 
         // Refactor DI
         List<Region> regions = MockDataProvider.INSTANCE.getRegions();

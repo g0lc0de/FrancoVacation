@@ -43,6 +43,10 @@ public class Activity {
         this.associatedCity = newAssociatedCity;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return "Activity:\n" +
