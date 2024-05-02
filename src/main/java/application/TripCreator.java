@@ -154,7 +154,7 @@ public class TripCreator {
             for (Activity a : activityList) {
 
 
-                List<Season> seasonList = getSeasonListFromQuery(query); q
+                List<Season> seasonList = getSeasonListFromQuery(query);
 
                 Set<Season> matchingSeasonSet = query.getSeasons().stream()
                         .filter(a.getSeasons()::contains)
