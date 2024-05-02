@@ -1,5 +1,9 @@
 package application;
 
+import domain.aggregate.Activity;
+import domain.aggregate.Region;
+import domain.aggregate.Trip;
+import domain.entity.City;
 import domain.valueObject.ActivityLevelType;
 import domain.valueObject.Query;
 import domain.valueObject.QueryText;

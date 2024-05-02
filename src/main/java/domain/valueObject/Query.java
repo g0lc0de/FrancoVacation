@@ -5,7 +5,7 @@ import domain.aggregate.Region;
 import java.util.List;
 import java.util.Objects;
 
-public class Query {
+public final class Query {
 
     private final List<Season> seasons;
     private final List<ActivityLevelType> activityLevel;

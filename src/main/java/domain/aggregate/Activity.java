@@ -22,11 +22,7 @@ public class Activity {
     List<Season> seasons;
 
     public Activity(String name, String description, Address address, ActivityLevel activityLevel, List<Season> seasons) {
-        this.name = name;
-        this.description = description;
-        this.address = address;
-        this.activityLevel = activityLevel;
-        this.seasons = seasons;
+        this(name, description, address, activityLevel, seasons, null);
     }
 
     public Activity(String name, String description, Address address, ActivityLevel activityLevel, List<Season> seasons, City associatedCity) {
@@ -36,7 +32,6 @@ public class Activity {
         this.activityLevel = activityLevel;
         this.seasons = seasons;
         this.associatedCity = associatedCity;
-
     }
 
     public City getAssociatedCity() {
