@@ -153,14 +153,8 @@ public class TripCreator {
 
             for (Activity a : activityList) {
 
-                List<Season> seasonList = query.getSeasons();
 
-                if (seasonList.isEmpty()) {
-                    seasonList.add(Season.WINTER);
-                    seasonList.add(Season.SUMMER);
-                    seasonList.add(Season.SPRING);
-                    seasonList.add(Season.FALL);
-                }
+                List<Season> seasonList = getSeasonListFromQuery(query); q
 
                 Set<Season> matchingSeasonSet = query.getSeasons().stream()
                         .filter(a.getSeasons()::contains)
@@ -170,13 +164,7 @@ public class TripCreator {
                     continue;
                 }
 
-                List<ActivityLevelType> validActivityLevels = query.getActivityLevel();
-
-                if (validActivityLevels.isEmpty()) {
-                    validActivityLevels.add(ActivityLevelType.LEISURE);
-                    validActivityLevels.add(ActivityLevelType.EASY_ACTIVITY);
-                    validActivityLevels.add(ActivityLevelType.SPORT);
-                }
+                List<ActivityLevelType> validActivityLevels = getActivityLevelTypesFromQuery(query);
 
                 if (!validActivityLevels.contains(a.getActivityLevel().getActivityLevelType())) {
                     continue;
@@ -207,5 +195,30 @@ public class TripCreator {
         Trip trip = new Trip(regionWithMaxMatchingActivities, matchingActivitiesPerRegionMap.get(regionWithMaxMatchingActivities.getName().toLowerCase()), query, regionWithMaxMatchingActivities.getCities());
 
         return trip;
+    }
+
+    public List<Season> getSeasonListFromQuery(Query query) {
+        List<Season> seasons = query.getSeasons();
+
+        if (seasons.isEmpty()) {
+            seasons.add(Season.WINTER);
+            seasons.add(Season.SUMMER);
+            seasons.add(Season.SPRING);
+            seasons.add(Season.FALL);
+        }
+
+        return seasons;
+    }
+
+    public List<ActivityLevelType> getActivityLevelTypesFromQuery(Query query) {
+        List<ActivityLevelType> validActivityLevels = query.getActivityLevel();
+
+        if (validActivityLevels.isEmpty()) {
+            validActivityLevels.add(ActivityLevelType.LEISURE);
+            validActivityLevels.add(ActivityLevelType.EASY_ACTIVITY);
+            validActivityLevels.add(ActivityLevelType.SPORT);
+        }
+
+        return  validActivityLevels;
     }
 }
