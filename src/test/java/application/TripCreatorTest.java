@@ -1,11 +1,6 @@
 package application;
 
-import domain.aggregate.Activity;
-import domain.aggregate.Region;
-import domain.aggregate.Trip;
-import domain.entity.City;
 import domain.valueObject.ActivityLevelType;
-import domain.valueObject.Query;
 import domain.valueObject.QueryText;
 import domain.valueObject.Season;
 import domain.valueObject.auxilliary.QueryBuilder;
@@ -58,7 +53,7 @@ class TripCreatorTest {
         queryBuilder.buildSeason(Season.SUMMER).buildSeason(Season.WINTER);
         queryBuilder.buildActivityLvl(ActivityLevelType.LEISURE);
 
-        assertEquals(queryBuilder.build(), tripCreator.parseQueryText(queryText));
+        assertEquals(queryBuilder.build(), tripCreator.getQueryFromQueryText(queryText));
     }
 
     @Test
@@ -69,7 +64,7 @@ class TripCreatorTest {
         queryBuilder.buildSeason(Season.SUMMER);
         queryBuilder.buildActivityLvl(ActivityLevelType.SPORT);
 
-        assertEquals(queryBuilder.build(), tripCreator.parseQueryText(queryText));
+        assertEquals(queryBuilder.build(), tripCreator.getQueryFromQueryText(queryText));
     }
 
     @Test
@@ -81,7 +76,7 @@ class TripCreatorTest {
         queryBuilder.buildActivityLvl(ActivityLevelType.SPORT);
         queryBuilder.buildRegion(queryDataFinder.getRegionFromName("schwarzwald"));
 
-        assertEquals(queryBuilder.build(), tripCreator.parseQueryText(queryText));
+        assertEquals(queryBuilder.build(), tripCreator.getQueryFromQueryText(queryText));
     }
 
 }

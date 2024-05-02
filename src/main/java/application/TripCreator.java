@@ -42,7 +42,7 @@ public class TripCreator {
         activityLevelTypeConverterMap.put("entspannen", ActivityLevelType.LEISURE);
     }
 
-    public Query parseQueryText(QueryText queryText) {
+    public Query getQueryFromQueryText(QueryText queryText) {
 
         String[] queryWords = queryText.getQueryText().toLowerCase(Locale.ROOT).split(" ");
         QueryBuilder queryBuilder = new QueryBuilder();
@@ -129,7 +129,7 @@ public class TripCreator {
     public Trip findTripBasedOnQuery(String queryText) {
         QueryDataFinder queryDataFinder = new QueryDataFinder(MockDataProvider.INSTANCE);
 
-        Query query = parseQueryText(new QueryText(queryText));
+        Query query = getQueryFromQueryText(new QueryText(queryText));
 
         // LOGIC
         List<Region> regions = query.getRegions();
